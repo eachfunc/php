@@ -6,15 +6,25 @@
  * @param null $callback
  * @return array
  */
-function each_func(array $list = [], $callback = null)
+function each_func($list = [], $callback = null)
 {
-    if (!is_callable($callback)) {
-        return $list;
+    if (!is_array($list)) {
+        $list = (array) $list;
+    }
+
+    if (!is_array($list)) {
+        return null;
     }
 
     if (count($list) === 0) {
         return $list;
     }
+
+    if (!is_callable($callback)) {
+        return $list;
+    }
+
+
 
     $new_list = [];
 
