@@ -4,21 +4,27 @@
 /**
  * @param array $list
  * @param null $callback
- * @return array|mixed
+ * @return array
  */
-function each_func($list = [], $callback = null)
+function each_func(array $list = [], $callback = null)
 {
     if (!is_callable($callback)) {
         return $list;
     }
 
+    if (count($list) === 0) {
+        return $list;
+    }
+
     $new_list = [];
+
     foreach ($list as $key => $item) {
         $result = $callback($item, $key);
         if($result !== null){
             $new_list[$key] = $result;
         }
     }
+
     return $new_list;
 }
 
